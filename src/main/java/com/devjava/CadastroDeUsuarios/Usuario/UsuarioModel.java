@@ -1,12 +1,15 @@
-package com.devjava.CadastroDeUsuarios;
+package com.devjava.CadastroDeUsuarios.Ninjas;
 
 
+import com.devjava.CadastroDeUsuarios.Missoes.CarroModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 //Entity transforma uma classe comum em uma entidade
 @Entity
-@Table(name = "tb_cadastro_de_ninjas")
-public class NinjaModel {
+@Table(name = "tb_cadastro")
+public class UsuarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,11 +17,12 @@ public class NinjaModel {
     private String nome;
     private String email;
     private int idade;
+    private List<CarroModel> missoes;
 
-    public NinjaModel() {
+    public UsuarioModel() {
     }
 
-    public NinjaModel(String nome, String email, int idade) {
+    public UsuarioModel(String nome, String email, int idade) {
         this.nome = nome;
         this.email = email;
         this.idade = idade;
@@ -47,6 +51,4 @@ public class NinjaModel {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-
-
 }
