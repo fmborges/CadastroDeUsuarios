@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CarroModel {
+public class CarrosModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
