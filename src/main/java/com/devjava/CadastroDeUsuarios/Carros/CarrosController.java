@@ -1,27 +1,40 @@
 package com.devjava.CadastroDeUsuarios.Carros;
 
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("missoes")
 public class CarrosController {
 
 
-    //Adicionar usuário  (CREATE)
+    // POST -- Mandar uma requisição para criar os carros
+    //Adicionar carro
+    @PostMapping("/criar")
+    public String criarCrarro(){
+        return "Carro criado com sucesso";
+    }
+
+    // GET - MAndar uma requisição para mostrar os carros
+    //Mostrar carro
+    @GetMapping("/listar")
+    public String listarCarros(){
+        return "Lista de carros";
+    }
+
+    // PUT -- Manda um requisição para alaterar os carros
+    //Alterar dados dos carros
+    @PutMapping("/alterar")
+    public String alterarCrarro(){
+        return "Carro alterado com sucesso";
+    }
 
 
-    //Procurar usuário por ID  (CREATE)
-
-
-    //Mostrar Usuários por ID   (READ)
-
-
-    //Alterar dados dos usuários  (UPDATE)
-
-
-    //Deletar usuário    (DELETE)
+    // DELETE -- Manda um requisição para deletar os carros
+    //Deletar carro
+    @DeleteMapping("/deletar")
+    public String deletarCarro(){
+        return "Carro deletado com sucesso";
+    }
 
 }
