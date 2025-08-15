@@ -1,6 +1,7 @@
 package com.devjava.CadastroDeUsuarios.Carros;
 
 import com.devjava.CadastroDeUsuarios.Usuario.UsuarioModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class CarrosModel {
 
     //@OneToMany Um carro pode ter varios motoristas
     @OneToMany(mappedBy = "carros")
+    @JsonIgnore  //ignorar o looping ao abrir a lista no navegador
     private List<UsuarioModel> usuarios;
 
 }
