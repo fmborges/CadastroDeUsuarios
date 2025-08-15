@@ -19,14 +19,14 @@ public class UsuarioController {
     }
 
     //Mostra todos usuários (READ)
-    @GetMapping("/todos")
+    @GetMapping("/listar")
     public String mostrarTodosUsuaris(){
         return "Mostrar todos os usuários";
     }
 
 
     //Mostrar Usuários por ID   (READ)
-    @GetMapping("/todosID")
+    @GetMapping("/listarID")
     public String mostrarUsuarioID(){
         return "Mostrar usuários por ID";
     }
