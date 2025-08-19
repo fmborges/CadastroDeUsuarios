@@ -34,9 +34,9 @@ public class UsuarioController {
     }
 
     //Mostrar Usuários por ID   (READ)
-    @GetMapping("/listarID")
-    public String mostrarUsuarioID(){
-        return "Mostrar usuários por ID";
+    @GetMapping("/listar/{id}")
+    public UsuarioModel listarUsuarioPorId(@PathVariable Long id){
+        return usuarioService.listarUsuarioPorID(id);
     }
 
 
