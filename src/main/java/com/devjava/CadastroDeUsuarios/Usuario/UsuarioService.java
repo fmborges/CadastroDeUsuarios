@@ -21,11 +21,16 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    //lista usuário pot ID
+    //Lista usuário pot ID
     public UsuarioModel listarUsuarioPorID(long id){
         //caso não possua usuário no ID informado
         Optional<UsuarioModel> usuarioPorId = usuarioRepository.findById(id);
         return usuarioPorId.orElse(null);
+    }
+
+    //Criar um novo usuário
+    public UsuarioModel criarUsuario(UsuarioModel usuario){
+        return usuarioRepository.save(usuario);
     }
 
 
