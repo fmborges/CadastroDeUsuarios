@@ -33,6 +33,12 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    //Deletar usuario - tem que ser um metodo VOID
+    public void  deletarUsuarioPorId(Long id){
+        usuarioRepository.deleteById(id);
+    }
+
+
 
 
 
