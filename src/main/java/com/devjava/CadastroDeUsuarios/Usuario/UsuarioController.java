@@ -41,9 +41,9 @@ public class UsuarioController {
 
 
     //Alterar dados dos usuários  (UPDATE)
-    @PutMapping("/alterarID")
-    public String alterarUsuarioPorId(){
-        return "Alerar usuário por ID";
+    @PutMapping("/alterar/{ID}")
+    public UsuarioModel alterarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioModel usuarioAtualizado){
+        return usuarioService.atualizarUsuario(id, usuarioAtualizado);
     }
 
 
