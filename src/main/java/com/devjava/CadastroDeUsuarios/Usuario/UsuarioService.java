@@ -11,9 +11,11 @@ public class UsuarioService {
 
 
     private UsuarioRepository usuarioRepository;
+    private UsuarioMapper usuarioMapper;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioMapper = usuarioMapper;
     }
 
     //Listar todos usuário
@@ -29,8 +31,10 @@ public class UsuarioService {
     }
 
     //Criar um novo usuário
-    public UsuarioModel criarUsuario(UsuarioModel usuario){
-        return usuarioRepository.save(usuario);
+    public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO){
+        UsuarioModel usuario = usuarioMapper.map(usuarioDTO);
+        usuarioRepository.save(usuario);
+        return usuarioMapper.map(usuario);
     }
 
     //Deletar usuario - tem que ser um metodo VOID
