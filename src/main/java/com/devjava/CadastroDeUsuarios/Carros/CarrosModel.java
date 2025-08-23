@@ -20,9 +20,14 @@ public class CarrosModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "Nome_do_carro")
     private String nomeDoCarro;
 
+    @Column(name = "Marca_do_carro")
     private String marcaDoCarro;
+
+    @Column(name = "Tipo_do_Cambio")
+    private String cambio;
 
     //@OneToMany Um carro pode ter varios motoristas
     @OneToMany(mappedBy = "carros")
