@@ -33,7 +33,7 @@ public class UsuarioService {
     //Criar um novo usuário
     public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO){
         UsuarioModel usuario = usuarioMapper.map(usuarioDTO);
-        usuarioRepository.save(usuario);
+        usuario = usuarioRepository.save(usuario);
         return usuarioMapper.map(usuario);
     }
 
@@ -50,12 +50,4 @@ public class UsuarioService {
         }
         return null;
     }
-
-
-
-
-
-
-
-
 }
