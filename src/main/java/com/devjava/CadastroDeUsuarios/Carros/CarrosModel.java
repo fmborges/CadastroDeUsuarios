@@ -19,14 +19,11 @@ public class CarrosModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "Nome_do_carro")
     private String nomeDoCarro;
-
     @Column(name = "Marca_do_carro")
     private String marcaDoCarro;
-
-    @Column(name = "Tipo_do_Cambio")
+    @Column(name = "Cambio_do_carro")
     private String cambio;
 
     //@OneToMany Um carro pode ter varios motoristas
