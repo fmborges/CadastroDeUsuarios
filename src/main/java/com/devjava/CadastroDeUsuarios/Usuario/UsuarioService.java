@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -19,15 +20,18 @@ public class UsuarioService {
     }
 
     //Listar todos usuário
-    public List<UsuarioModel> listarUsuarios(){
-        return usuarioRepository.findAll();
+    public List<UsuarioDTO> listarUsuarios(){
+        List<UsuarioModel> usuarios = usuarioRepository.findAll();
+        return usuarios.stream()
+                .map(usuarioMapper::map)
+                .collect(Collectors.toList());
     }
 
     //Lista usuário pot ID
-    public UsuarioModel listarUsuarioPorID(long id){
+    public UsuarioDTO listarUsuarioPorID(long id){
         //caso não possua usuário no ID informado
         Optional<UsuarioModel> usuarioPorId = usuarioRepository.findById(id);
-        return usuarioPorId.orElse(null);
+        return usuarioPorId.map(usuarioMapper::map).orElse(null);
     }
 
     //Criar um novo usuário
@@ -43,10 +47,13 @@ public class UsuarioService {
     }
 
     //Atualizar usuario
-    public UsuarioModel atualizarUsuario(Long id,UsuarioModel usuarioAtualizado){
-        if (usuarioRepository.existsById(id)) {
+    public UsuarioDTO atualizarUsuario(Long id,UsuarioDTO usuarioDTO){
+        Optional<UsuarioModel> usuarioexistente = usuarioRepository.findById(id);
+        if (usuarioexistente.isPresent()) {
+            UsuarioModel usuarioAtualizado = usuarioMapper.map(usuarioDTO);
             usuarioAtualizado.setId(id);
-            return usuarioRepository.save(usuarioAtualizado);
+            UsuarioModel usuarioSalvo =usuarioRepository.save(usuarioAtualizado);
+            return usuarioMapper.map(usuarioSalvo);
         }
         return null;
     }
