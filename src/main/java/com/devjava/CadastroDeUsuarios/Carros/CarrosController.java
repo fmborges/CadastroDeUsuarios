@@ -1,18 +1,24 @@
 package com.devjava.CadastroDeUsuarios.Carros;
 
 
+import com.devjava.CadastroDeUsuarios.Usuario.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("missoes")
 public class CarrosController {
 
+    private CarrosService carrosService;
+
+    public CarrosController(CarrosService carrosService) {
+        this.carrosService = carrosService;
+    }
 
     // POST -- Mandar uma requisição para criar os carros
     //Adicionar carro
     @PostMapping("/criar")
-    public String criarCrarro(){
-        return "Carro criado com sucesso";
+    public CarrosDTO criarCrarro(@RequestBody CarrosDTO carro){
+        return carrosService.criarcarro(carro);
     }
 
     // GET - MAndar uma requisição para mostrar os carros

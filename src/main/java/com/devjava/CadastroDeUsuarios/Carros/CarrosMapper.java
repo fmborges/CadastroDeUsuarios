@@ -1,6 +1,8 @@
 package com.devjava.CadastroDeUsuarios.Carros;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class CarrosMapper {
 
 
