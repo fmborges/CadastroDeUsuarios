@@ -15,7 +15,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 @RequestMapping("missoes")
 public class CarrosController {
 
-    private CarrosService carrosService;
+    private final CarrosService carrosService;
 
     public CarrosController(CarrosService carrosService) {
         this.carrosService = carrosService;

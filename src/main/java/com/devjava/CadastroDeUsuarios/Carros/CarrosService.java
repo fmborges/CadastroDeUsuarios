@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class CarrosService {
-    private CarrosRepository carrosRepository;
-    private CarrosMapper carrosMapper;
+    private final CarrosRepository carrosRepository;
+    private final CarrosMapper carrosMapper;
 
 
     public CarrosService(CarrosRepository carrosRepository, CarrosMapper carrosMapper) {
