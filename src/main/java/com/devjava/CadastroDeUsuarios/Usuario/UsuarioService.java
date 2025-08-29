@@ -27,7 +27,7 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
-    //Lista usuário pot ID
+    //Lista usuário por ID
     public UsuarioDTO listarUsuarioPorID(long id){
         //caso não possua usuário no ID informado
         Optional<UsuarioModel> usuarioPorId = usuarioRepository.findById(id);
@@ -48,8 +48,8 @@ public class UsuarioService {
 
     //Atualizar usuario
     public UsuarioDTO atualizarUsuario(Long id,UsuarioDTO usuarioDTO){
-        Optional<UsuarioModel> usuarioexistente = usuarioRepository.findById(id);
-        if (usuarioexistente.isPresent()) {
+        Optional<UsuarioModel> usuarioExistente = usuarioRepository.findById(id);
+        if (usuarioExistente.isPresent()) {
             UsuarioModel usuarioAtualizado = usuarioMapper.map(usuarioDTO);
             usuarioAtualizado.setId(id);
             UsuarioModel usuarioSalvo =usuarioRepository.save(usuarioAtualizado);

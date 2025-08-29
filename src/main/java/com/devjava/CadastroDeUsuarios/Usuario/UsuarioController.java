@@ -19,7 +19,7 @@ public class UsuarioController {
 
     @GetMapping("/boasVindas")
     public String boasVindas(){
-        return "Essa é minha primeira mensagem!";
+        return "Bem Vindo!";
     }
 
     //Adicionar usuário  (CREATE)

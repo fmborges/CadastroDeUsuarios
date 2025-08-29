@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -22,15 +23,18 @@ public class CarrosService {
     }
 
     //Listar todos carros
-    public List<CarrosModel> listarcarros(){
-        return carrosRepository.findAll();
+    public List<CarrosDTO> listarcarros(){
+        List<CarrosModel> carros = carrosRepository.findAll();
+        return carros.stream()
+                .map(carrosMapper::map)
+                .collect(Collectors.toList());
     }
 
     //Lista carro por ID
-    public CarrosModel listarCarroPorID(long id){
+    public CarrosDTO listarCarroPorID(long id){
         //caso não possua carro no ID informado
         Optional<CarrosModel> carroPorId = carrosRepository.findById(id);
-        return carroPorId.orElse(null);
+        return carroPorId.map(carrosMapper::map).orElse(null);
     }
 
     //Criar um novo carro
@@ -46,10 +50,13 @@ public class CarrosService {
     }
 
     //Atualizar carro
-    public CarrosModel atualizarCarro(Long id,CarrosModel carroAtualizado){
-        if (carrosRepository.existsById(id)) {
+    public CarrosDTO atualizarCarro(Long id,CarrosDTO carrosDTO){
+        Optional<CarrosModel> carroExistente = carrosRepository.findById(id);
+        if (carroExistente.isPresent()) {
+            CarrosModel carroAtualizado = carrosMapper.map(carrosDTO);
             carroAtualizado.setId(id);
-            return carrosRepository.save(carroAtualizado);
+            CarrosModel carroSalvo = carrosRepository.save(carroAtualizado);
+            return carrosMapper.map(carroSalvo);
         }
         return null;
     }
