@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuários</title>
+    <style>
+        .top-actions {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add:hover {
+    background-color: #218838;
+}
+
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f7fa;
+            padding: 30px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f6fc;
+        }
+
+        tbody tr:hover {
+            background-color: #e9f1ff;
+        }
+
+        td:last-child {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* Botões */
+        a {
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            color: white;
+        }
+
+        a:nth-child(1) {
+            background-color: #17a2b8;
+        }
+
+        a:nth-child(1):hover {
+            background-color: #138496;
+        }
+
+        a:nth-child(2) {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        a:nth-child(2):hover {
+            background-color: #e0a800;
+        }
+
+        a:nth-child(3) {
+            background-color: #dc3545;
+        }
+
+        a:nth-child(3):hover {
+            background-color: #c82333;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                background-color: #fff;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #555;
+            }
+
+            td:last-child {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Usuários</h1>
+<div class="top-actions">
+    <a class="btn-add" th:href="@{/usuarios/ui/adicionar}">+ Adicionar Usuário</a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Email</th>
+        <th>Carros</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td data-label="ID" th:text="${usuario.id}"></td>
+        <td data-label="Nome" th:text="${usuario.nome}"></td>
+        <td data-label="Idade" th:text="${usuario.idade}"></td>
+        <td data-label="Email" th:text="${usuario.email}"></td>
+
+        <td data-label="Carros">
+            <span th:if="${usuario.carros != null}">
+                <span th:text="${usuario.carros.marcaDoCarro}"></span>,
+                <span th:text="${usuario.carros.nomeDoCarro}"></span>,
+                Câmbio: <span th:text="${usuario.carros.cambio}"></span>
+            </span>
+            <span th:if="${usuario.carros == null}">
+                Sem carros cadastrados para o usuário
+            </span>
+        </td>
+
+        <td data-label="Ações">
+            <a th:href="@{/usuarios/ui/listar/{id}(id=${usuario.id})}">Ver Detalhes</a>
+            <a th:href="@{/usuarios/ui/#/{id}(id=${usuario.id})}">Alterar</a>
+            <a th:href="@{/usuarios/ui/deletar/{id}(id=${usuario.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
