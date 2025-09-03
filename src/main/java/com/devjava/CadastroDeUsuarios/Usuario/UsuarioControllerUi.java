@@ -57,6 +57,18 @@ public class UsuarioControllerUi {
         redirectAttributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso");
         return "redirect:/usuarios/ui/listar";
     }
+    @GetMapping("/alterar/{id}")
+    public String mostrarFormularioAlterarUsuario(@PathVariable Long id, Model model) {
+        UsuarioDTO usuario = usuarioService.listarUsuarioPorID(id);
+        if (usuario != null) {
+            model.addAttribute("usuario", usuario);
+            return "alterarUsuario"; // essa será sua nova view
+        } else {
+            model.addAttribute("mensagem", "Usuário não encontrado");
+            return "redirect:/usuarios/ui/listar";
+        }
+    }
+
 
 
 

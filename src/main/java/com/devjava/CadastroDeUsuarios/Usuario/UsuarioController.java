@@ -1,5 +1,8 @@
 package com.devjava.CadastroDeUsuarios.Usuario;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +21,18 @@ public class UsuarioController {
     }
 
     @GetMapping("/boasVindas")
+    @Operation(summary = "Mensagem de boas vindas", description = "essa rota da uma mensagem de boas vindas para o usuário que acessar.")
     public String boasVindas(){
         return "Bem Vindo!";
     }
 
     //Adicionar usuário  (CREATE)
     @PostMapping("/criar")
+    @Operation(summary = "Cria um novo usuário", description = "Rota cria um novo usuário e insere no banco de dados.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro na criação do usuário")
+    })
     public ResponseEntity<String> criarUsuario(@RequestBody UsuarioDTO usuario){
         UsuarioDTO novoUsuario = usuarioService.criarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -40,6 +49,11 @@ public class UsuarioController {
 
     //Mostrar Usuários por ID   (READ)
     @GetMapping("/listar/{id}")
+    @Operation(summary = "Lista o usuário por ID", description = "Rota lista um usuário pelo seu Id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "usuário encontrado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro usuário não encontrado")
+    })
     //Foi coloca ? para ser um Generics e o retorno possa devolver Json
     public ResponseEntity<?> listarUsuarioPorId(@PathVariable Long id){
 
@@ -57,6 +71,11 @@ public class UsuarioController {
 
     //Alterar dados dos usuários  (UPDATE)
     @PutMapping("/alterar/{ID}")
+    @Operation(summary = "Altera o usuário por ID", description = "Rota altera o usuário pelo seu Id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Usuário alterado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro usuário não encontrado, Não foi possível alterar.")
+    })
     public ResponseEntity<?> alterarUsuarioPorId(@PathVariable Long id, @RequestBody UsuarioDTO usuarioAtualizado) {
 
         UsuarioDTO usuario = usuarioService.atualizarUsuario(id, usuarioAtualizado);
